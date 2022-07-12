@@ -100,7 +100,7 @@ const postSlice = createSlice({
         rocket: 0,
         coffee: 0,
       }
-      console.log(action.payload)
+      // console.log(action.payload)
       state.posts.push(action.payload);
     })
   }
@@ -109,6 +109,8 @@ const postSlice = createSlice({
 export const allPosts = (state) => state.posts.posts;
 export const postsStatus = (state) => state.posts.status;
 export const postsError = (state) => state.posts.error;
+
+export const postById = (state, postId) => state.posts.posts.find(post => post.id === postId);
 
 export const { addPost, reactionAdded } = postSlice.actions;
 
