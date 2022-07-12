@@ -162,3 +162,12 @@ form {
 .logo{
   color: white;
 }
+
+.users{
+  color: white;
+}
+
+.ul-users {
+  list-style-type: none;
+  line-height: 1.5em;
+}
