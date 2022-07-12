@@ -1,5 +1,4 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { postById } from './postSlice';
 
@@ -28,6 +27,7 @@ const SinglePost = () => {
         <PostAuthor userId={post.userId} />
         <TimeAgo timestamp={post.date} />
       </p>
+      <Link className="link" to={`/post/edit/${post.id}`}>Edit Post</Link>
       <ReactionButton post={post} />
     </article>
   );
