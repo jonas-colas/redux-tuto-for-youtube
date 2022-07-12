@@ -13,6 +13,7 @@ const postAdapter = createEntityAdapter({
   sortComparer: (a, b) => b.date.localeCompare(a.date)
 })
 
+//Before the memoizing 
 // const initialState = {
 //   posts: [],
 //   status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
@@ -20,6 +21,7 @@ const postAdapter = createEntityAdapter({
 //   count: 0,
 // };
 
+//With the memoizing 
 const initialState = postAdapter.getInitialState({
   status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
