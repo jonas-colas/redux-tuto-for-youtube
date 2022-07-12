@@ -3,7 +3,6 @@ import axios from 'axios';
 import { sub } from 'date-fns';
 
 const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
-// const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
 
 const initialState = {
   posts: [],
@@ -14,7 +13,15 @@ const initialState = {
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   try {
     const response = await axios.get(POSTS_URL);
-    // return [...response.data]
+    return response.data;
+  } catch (err) {
+    return err.message;
+  }
+});
+
+export const newPost = createAsyncThunk('posts/newPost', async (initialPost) => {
+  try {
+    const response = await axios.post(POSTS_URL, initialPost);
     return response.data;
   } catch (err) {
     return err.message;
@@ -82,6 +89,19 @@ const postSlice = createSlice({
     .addCase(fetchPosts.rejected, (state, action) => {
       state.status = 'failed';
       state.error = action.error.message;
+    })
+    .addCase(newPost.fulfilled, (state, action) => {
+      action.payload.userId = Number(action.payload.userId);
+      action.payload.date = new Date().toISOString();
+      action.payload.reactions = {
+        thumbsUp: 0,
+        wow: 0,
+        heart: 0,
+        rocket: 0,
+        coffee: 0,
+      }
+      console.log(action.payload)
+      state.posts.push(action.payload);
     })
   }
 });
